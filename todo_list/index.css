@@ -1,0 +1,8 @@
+.title, .clock, .toDoForm {
+    text-align: center;
+}
+
+.toDoForm input {
+    width: 600px;
+}
+
