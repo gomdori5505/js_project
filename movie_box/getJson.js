@@ -1,6 +1,6 @@
 const KEY = "eef536b62bd88c81e94777d5de915cc2";
-const DATE = "20201201";
-const HOST_KEY = `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=${KEY}&targetDt=${DATE}`;
+const DATE = yesterdayDate();
+const HOST_KEY = `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${KEY}&targetDt=${DATE}`;
 let movieRankArr = [];
 let movieType = "";
 let movieDateRange = "";
@@ -15,7 +15,7 @@ fetch(HOST_KEY)
   .then(data => {
     // json 출력
     console.log(data);
-    data.boxOfficeResult.weeklyBoxOfficeList.forEach(element => {
+    data.boxOfficeResult.dailyBoxOfficeList.forEach(element => {
       movieRankArr.push(element);
     });
     movieType = data.boxOfficeResult.boxofficeType;
@@ -26,3 +26,21 @@ fetch(HOST_KEY)
     // error 처리
     console.log('Fetch Error', err);
   });
+
+  function yesterdayDate() {
+    const yesDate = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    const year = yesDate.getFullYear();
+    const month = addZero(yesDate.getMonth());
+    const day = addZero(yesDate.getDate());
+    
+    return `${year}${month}${day}`;
+    
+  }
+
+  function addZero(num) {
+    if(num < 10) {
+      return `0${num}`;
+    }else {
+      return num;
+    }
+  }

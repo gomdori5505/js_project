@@ -1,0 +1,9 @@
+.rank {
+    width: 50%;
+    float: left;
+}
+
+.myMovieBox {
+    width: 50%;
+    display: inline-block;
+}
