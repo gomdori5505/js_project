@@ -1,16 +1,23 @@
 const classRank = document.querySelector(".rank");
 const classMyMovieBox = document.querySelector(".myMovieBox");
 
-function createBoxForm(parentLi) {
-    const ul = classMyMovieBox.querySelector("ul");
-    console.log(parentLi);
-    ul.innerHTML = parentLi;
+function createBoxForm(li) {
+    if(classMyMovieBox.querySelector("ul")) { // for prevent to create the ul again
+        var ul = classMyMovieBox.querySelector("ul"); // due to var is "function scoped"!!!
+    } else {
+        var ul = document.createElement("ul");
+        classMyMovieBox.appendChild(ul);
+    }
+    li.removeChild(li.childNodes[5]); // remove button
+    ul.appendChild(li);
 }
 
 function saveMovie(event) {
     const btn = event.target;
     const li = btn.parentNode;
-    createBoxForm(li);
+    const cloneLi = li.cloneNode(true); // cloneNode must be needed.
+    console.log(cloneLi);
+    createBoxForm(cloneLi);
 }
 
 function createRankForm(rank, rankIntern, movieNm, salesAcc, audiAcc) {
@@ -34,13 +41,13 @@ function createRankForm(rank, rankIntern, movieNm, salesAcc, audiAcc) {
     if(rankIntern == 0) {
         rankIntern = `-`;
     } else if(rankIntern < 0) {
-        rankIntern = `⬇${Math.abs(rankIntern)}`;
+        rankIntern = `<span style="color: blue;">⬇${Math.abs(rankIntern)}</span>`;
     } else {
-        rankIntern = `⬆${rankIntern}`;
+        rankIntern = `<span style="color: red;">⬆${rankIntern}</span>`;
     }
 
     spanRank.innerText = `${rank}위`;
-    spanRankIntern.innerText = `${rankIntern}`;
+    spanRankIntern.innerHTML = `${rankIntern}`;
     spanName.innerText = `${movieNm}`;
     spanSale.innerText = `누적 ₩ ${salesAcc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
     spanAudi.innerText = `누적 ${audiAcc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 명`;

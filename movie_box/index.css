@@ -1,26 +1,26 @@
 
-.rank ul li span {
+.rank ul li span, .myMovieBox ul li span {
     display: inline-block;
     margin-right: 10px;
 }
 
-.rank ul li span:nth-child(1) {
+.rank ul li span:nth-child(1), .myMovieBox ul li span:nth-child(1) {
     width: 3%;
 }
 
-.rank ul li span:nth-child(2) {
+.rank ul li span:nth-child(2), .myMovieBox ul li span:nth-child(2) {
     width: 4%;
     text-align: center;
 }
 
-.rank ul li span:nth-child(3) {
+.rank ul li span:nth-child(3), .myMovieBox ul li span:nth-child(3) {
     width: 27%;
 }
 
-.rank ul li span:nth-child(4) {
+.rank ul li span:nth-child(4), .myMovieBox ul li span:nth-child(4) {
     width: 16%;
 }
 
-.rank ul li span:nth-child(5) {
+.rank ul li span:nth-child(5), .myMovieBox ul li span:nth-child(5) {
     width: 11%;
 }
