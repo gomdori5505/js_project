@@ -28,13 +28,12 @@ fetch(HOST_KEY)
   });
 
   function yesterdayDate() {
-    const yesDate = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    const yesDate = (d => new Date(d.setDate(d.getDate()-1)))(new Date);
     const year = yesDate.getFullYear();
     const month = addZero(yesDate.getMonth());
     const day = addZero(yesDate.getDate());
     
     return `${year}${month}${day}`;
-    
   }
 
   function addZero(num) {
