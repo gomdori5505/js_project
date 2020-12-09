@@ -14,10 +14,25 @@ function createBoxForm(li) {
 
 function saveMovie(event) {
     const btn = event.target;
-    const li = btn.parentNode;
+    const li = btn.parentNode; // parent node for li
     const cloneLi = li.cloneNode(true); // cloneNode must be needed.
-    console.log(cloneLi);
-    createBoxForm(cloneLi);
+    var checkMovie = false; // 중복여부 체크용 변수 (var) 초기화
+
+    // prevent for duplicate adding
+    classMyMovieBox.querySelectorAll("li").forEach(e => {
+        const addedMovie = e.childNodes[2].innerHTML;
+        const newAddMovie = cloneLi.childNodes[2].innerHTML;
+        if(addedMovie == newAddMovie) {
+            checkMovie = true; // 중복되면 true
+        }
+    });
+
+    if(checkMovie !== true) {
+        createBoxForm(cloneLi);
+    } else {
+        alert("이미 담아놓은 영화입니다."); // 중복되면 alert
+    }
+    
 }
 
 function createRankForm(rank, rankIntern, movieNm, salesAcc, audiAcc) {
@@ -53,7 +68,8 @@ function createRankForm(rank, rankIntern, movieNm, salesAcc, audiAcc) {
     spanAudi.innerText = `누적 ${audiAcc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 명`;
     saveBtn.innerText = `담기`;
     
-    saveBtn.addEventListener("click", saveMovie)
+    // 담기 버튼 클릭시 my movie box에 추가
+    saveBtn.addEventListener("click", saveMovie);
 }
 
 function showMovie() {
@@ -61,5 +77,5 @@ function showMovie() {
     classRank.appendChild(ul);
     movieRankArr.forEach(e => {
         createRankForm(e.rank, e.rankInten, e.movieNm, e.salesAcc, e.audiAcc);
-    });
+    }); // 필요한 정보만 foreach로 뽑아내서 createRankForm와 함께 넘김
 }

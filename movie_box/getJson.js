@@ -1,10 +1,13 @@
 const KEY = "eef536b62bd88c81e94777d5de915cc2";
 const DATE = yesterdayDate();
 const HOST_KEY = `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${KEY}&targetDt=${DATE}`;
+
+// 초기화
 let movieRankArr = [];
 let movieType = "";
 let movieDateRange = "";
 
+//api json 형태로 받아오기 (get 방식)
 fetch(HOST_KEY)
   .then(res => {
     // response 처리
@@ -17,7 +20,7 @@ fetch(HOST_KEY)
     console.log(data);
     data.boxOfficeResult.dailyBoxOfficeList.forEach(element => {
       movieRankArr.push(element);
-    });
+    }); // json으로 받은 결과 내 dailyBoxOfficeList 데이터 foreach로 array에 push
     movieType = data.boxOfficeResult.boxofficeType;
     movieDateRange = data.boxOfficeResult.showRange;
     showMovie();
@@ -27,19 +30,23 @@ fetch(HOST_KEY)
     console.log('Fetch Error', err);
   });
 
-  function yesterdayDate() {
-    const yesDate = (d => new Date(d.setDate(d.getDate()-1)))(new Date);
-    const year = yesDate.getFullYear();
-    const month = addZero(yesDate.getMonth());
-    const day = addZero(yesDate.getDate());
-    
-    return `${year}${month}${day}`;
-  }
 
-  function addZero(num) {
-    if(num < 10) {
-      return `0${num}`;
-    }else {
-      return num;
-    }
+// 어제 기준 날짜 출력
+// date form -> yyyymmdd
+function yesterdayDate() {
+  const yesDate = (d => new Date(d.setDate(d.getDate()-1)))(new Date);
+  const year = yesDate.getFullYear();
+  const month = addZero(yesDate.getMonth());
+  const day = addZero(yesDate.getDate());
+  
+  return `${year}${month}${day}`;
+}
+
+// 한자리 수 월,일 앞 0 추가
+function addZero(num) {
+  if(num < 10) {
+    return `0${num}`;
+  }else {
+    return num;
   }
+}
