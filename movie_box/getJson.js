@@ -27,9 +27,16 @@ fetch(HOST_KEY)
   .then(data => {
     // json 출력
     console.log(data);
-    data.boxOfficeResult.dailyBoxOfficeList.forEach(element => {
+    
+    // json으로 받은 결과 내 dailyBoxOfficeList 데이터 foreach로 array에 push
+    /*data.boxOfficeResult.dailyBoxOfficeList.forEach(element => {
       movieRankArr.push(element);
-    }); // json으로 받은 결과 내 dailyBoxOfficeList 데이터 foreach로 array에 push
+    });*/ 
+    
+    // 위 코드 대신 map을 사용함
+    movieRankArr = data.boxOfficeResult.dailyBoxOfficeList.map(e => {
+      return e
+    });
     movieType = data.boxOfficeResult.boxofficeType;
     movieDateRange = data.boxOfficeResult.showRange;
     showMovie(); // show the Movie Rank

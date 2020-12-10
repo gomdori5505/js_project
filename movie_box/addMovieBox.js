@@ -26,7 +26,6 @@ function createBoxForm(li) {
     delBtn.innerText = "삭제";
 
     li.querySelectorAll("span").forEach(e => {
-        console.log(e.innerHTML);
         liArr.push(e.innerHTML);
     });
 
