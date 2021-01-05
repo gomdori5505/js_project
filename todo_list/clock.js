@@ -4,7 +4,7 @@ clockTitle = clockDiv.querySelector("h2");
 function getDateTime() {
     const dateTime = new Date;
     const year = dateTime.getFullYear(),
-    month = dateTime.getMonth(),
+    month = dateTime.getMonth() + 1,
     day = dateTime.getDate(),
     hour = dateTime.getHours(),
     convertedHour = hour < 13 ? hour : hour-12,
